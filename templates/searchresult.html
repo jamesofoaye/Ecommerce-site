@@ -1,0 +1,48 @@
+{% extends 'base.html' %} {% load static %} {% static "img" as baseUrl %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+
+<section class="py-5 py-5">
+    <div class="container">
+        {% if search_results %}
+        {% for result in search_results %}
+        <div class="row mb-2">
+            <div class="col-md-12">
+              <a href="{% url 'detail' result.name %}" class="text-dark">
+              <div class="card shadow">
+                <div class="card-body">
+                    <div class="row" style="display: flex;justify-content: space-between;">
+                        <div class="col-xs-1 col-sm-2 col-md-1 mr-3">
+                            <img src="{{result.main_image.url}}" style="height: 15vh;object-fit: cover;" alt="product image">
+                        </div>
+                        <div class="col-xs-8 col-sm-7 col-md-8">
+                        <h5>{{result.name}}</h5>
+                        <p>${{result.price}}</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>nothing to show</p>
+        {% endif %}
+    </div>
+</section>
+
+</body>
+</html>
+{% endblock %}
